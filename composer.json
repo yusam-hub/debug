@@ -1,0 +1,26 @@
+{
+    "name": "yusam-hub/debug",
+    "description": "yusam-hub/debug",
+    "type": "package",
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.4|^8.0|^8.1|^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "YusamHub\\Debug\\": "src/"
+        },
+        "files": [
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "YusamHub\\Debug\\Tests\\": "tests/"
+        },
+        "files": [
+        ]
+    }
+}
