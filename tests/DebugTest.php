@@ -6,6 +6,16 @@ use YusamHub\Debug\Debug;
 
 class DebugTest extends \PHPUnit\Framework\TestCase
 {
+    public function testDefault()
+    {
+        Debug::instance(__DIR__ . '/../logs', true);
+        Debug::instance()->nddDump([
+            1,
+            2,
+            3
+        ]);
+    }
+
     /*public function testLogMethods()
     {
         Debug::instance()->logPrint('', [
