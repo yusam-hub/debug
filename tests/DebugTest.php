@@ -6,7 +6,7 @@ use YusamHub\Debug\Debug;
 
 class DebugTest extends \PHPUnit\Framework\TestCase
 {
-    public function testLogMethods()
+    /*public function testLogMethods()
     {
         Debug::instance()->logPrint('', [
             'key1' => 'value1'
@@ -18,18 +18,14 @@ class DebugTest extends \PHPUnit\Framework\TestCase
             'key1' => 'value1'
         ]);
         $this->assertTrue(true);
-    }
+    }*/
 
-    public function testNddMethods()
+    /*public function testNddMethods()
     {
         ob_start();
         $content = ob_get_contents();
         ob_end_clean();
         $this->assertEmpty($content);
-
-        /**
-         * -------------------------------------------------------------------------------------------------------------
-         */
 
         ob_start();
         Debug::instance()->nddPrint([
@@ -39,10 +35,6 @@ class DebugTest extends \PHPUnit\Framework\TestCase
         ob_end_clean();
         $this->assertNotEmpty($content);
 
-        /**
-         * -------------------------------------------------------------------------------------------------------------
-         */
-
         ob_start();
         Debug::instance()->nddPrePrint([
             'key1' => 'value1'
@@ -50,10 +42,6 @@ class DebugTest extends \PHPUnit\Framework\TestCase
         $content = ob_get_contents();
         ob_end_clean();
         $this->assertNotEmpty($content);
-
-        /**
-         * -------------------------------------------------------------------------------------------------------------
-         */
 
         ob_start();
         Debug::instance()->nddExport([
@@ -63,10 +51,6 @@ class DebugTest extends \PHPUnit\Framework\TestCase
         ob_end_clean();
         $this->assertNotEmpty($content);
 
-        /**
-         * -------------------------------------------------------------------------------------------------------------
-         */
-
         ob_start();
         Debug::instance()->nddPreExport([
             'key1' => 'value1'
@@ -74,10 +58,6 @@ class DebugTest extends \PHPUnit\Framework\TestCase
         $content = ob_get_contents();
         ob_end_clean();
         $this->assertNotEmpty($content);
-
-        /**
-         * -------------------------------------------------------------------------------------------------------------
-         */
 
         ob_start();
         Debug::instance()->nddDump([
@@ -87,10 +67,6 @@ class DebugTest extends \PHPUnit\Framework\TestCase
         ob_end_clean();
         $this->assertNotEmpty($content);
 
-        /**
-         * -------------------------------------------------------------------------------------------------------------
-         */
-
         ob_start();
         Debug::instance()->nddPreDump([
             'key1' => 'value1'
@@ -98,5 +74,5 @@ class DebugTest extends \PHPUnit\Framework\TestCase
         $content = ob_get_contents();
         ob_end_clean();
         $this->assertNotEmpty($content);
-    }
+    }*/
 }

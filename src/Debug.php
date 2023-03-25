@@ -2,18 +2,6 @@
 
 namespace YusamHub\Debug;
 
-if (!defined('YUSAM_HUB_IS_DEBUGGING')) {
-    define('YUSAM_HUB_IS_DEBUGGING', false);
-}
-
-if (!defined('YUSAM_HUB_DEBUG_LOG_DIR')) {
-    define('YUSAM_HUB_DEBUG_LOG_DIR', __DIR__);
-}
-
-if (!defined('YUSAM_HUB_DEBUG_FORMAT_DATETIME')) {
-    define('YUSAM_HUB_DEBUG_FORMAT_DATETIME', 'Y-m-d H:i:s');
-}
-
 /**
  * Class Debug
  * @package YusamHub\Debug
@@ -23,30 +11,37 @@ class Debug
     /**
      * @var Debug|null
      */
-    private static ?Debug $instance = null;
+    protected static ?Debug $instance = null;
+    protected static ?string $logDir = null;
+
+    /**
+     * @param string|null $logDir
+     * @return Debug
+     */
+    public static function instance(?string $logDir = null, ?bool $isDebugging = null): Debug
+    {
+        if (is_null(static::$instance)) {
+            static::$instance = new static($logDir, $isDebugging);
+        }
+        return static::$instance;
+    }
 
     /**
      * @var bool
      */
-    protected bool $isDebugging;
+    protected bool $isDebugging = true;
 
     /**
      * Debug constructor.
      */
-    public function __construct()
+    public function __construct(?string $logDir = null, ?bool $isDebugging = null)
     {
-        $this->isDebugging = (bool) constant('YUSAM_HUB_IS_DEBUGGING');
-    }
-
-    /**
-     * @return Debug
-     */
-    public static function instance(): Debug
-    {
-        if (is_null(static::$instance)) {
-            static::$instance = new static();
+        if (!is_null($logDir)) {
+            $this::$logDir = $logDir;
         }
-        return static::$instance;
+        if (!is_null($isDebugging)) {
+            $this->isDebugging = $isDebugging;
+        }
     }
 
     /**
@@ -246,7 +241,7 @@ class Debug
      */
     protected function getSystemString(): string
     {
-        return date(constant('YUSAM_HUB_DEBUG_FORMAT_DATETIME')) . " " . static::milliseconds() . " " . getmypid();
+        return date("Y-m-d H:i:s") . " " . static::milliseconds() . " " . getmypid();
     }
 
     /**
@@ -255,7 +250,7 @@ class Debug
      */
     protected function prepareFile(string $shortName): string
     {
-        $file = constant('YUSAM_HUB_DEBUG_LOG_DIR') . DIRECTORY_SEPARATOR . $shortName . "-" . date("Y-m-d"). ".log";
+        $file = rtrim($this::$logDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $shortName . "-" . date("Y-m-d"). ".log";
         $directory = pathinfo($file, PATHINFO_DIRNAME);
 
         if (!file_exists($directory)) {
